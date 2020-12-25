@@ -1,26 +1,34 @@
 <?php
 
 Route::get('login', 'AuthController@login')->name('login');
-Route::get('login-ajax', 'AuthController@login')->name('login-ajax');
+Route::post('login-ajax', 'Ajax\AuthController@login')->name('login-ajax');
 
 Route::middleware(['auth:web'])->group(function () {
+    Route::get('/', 'DashboardController@home')->name('home');
     Route::get('logout', 'AuthController@logout')->name('logout');
 
-    Route::get('/', 'ProductController@all')->name('home');
+    Route::prefix('category')->name('category.')->group(function(){
+        Route::get('all', 'CategoryController@all')->name('all');
+        Route::get('edit/{category}', 'CategoryController@edit')->name('edit');
+        Route::get('add', 'CategoryController@add')->name('add');
 
-    Route::prefix('product')->group(function () {
-        Route::get('all', 'ProductController@all')->name('product-all');
-        Route::get('add', 'ProductController@add')->name('product-add');
-        Route::get('edit/{id}', 'ProductController@edit')->name('product-edit');
-    });
-/*
-    Route::prefix('customer')->group(function () {
-        Route::get('all', 'CustomerController@all')->name('customer-all');
+        Route::prefix('ajax')->name('ajax.')->namespace('Ajax')->group(function(){
+            Route::get('all', 'CategoryController@all')->name('all');
+            Route::post('update/{category}', 'CategoryController@update')->name('update');
+            Route::post('add', 'CategoryController@add')->name('add');
+        });
     });
 
-    Route::prefix('order')->group(function () {
-        Route::get('all', 'OrderController@all')->name('order-all');
-        Route::get('show/{id}', 'OrderController@show')->name('order-show');
+    Route::prefix('product')->name('product.')->group(function(){
+        Route::get('all', 'ProductController@all')->name('all');
+        Route::get('edit/{product}', 'ProductController@edit')->name('edit');
+        Route::get('add', 'ProductController@add')->name('add');
+
+        Route::prefix('ajax')->name('ajax.')->namespace('Ajax')->group(function(){
+            Route::get('all', 'ProductController@all')->name('all');
+            Route::post('update/{product}', 'ProductController@update')->name('update');
+            Route::post('add', 'ProductController@add')->name('add');
+        });
     });
-*/
+
 });

@@ -9,6 +9,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/datatables/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/panel.css') }}" rel="stylesheet">
     <meta name="theme-color" content="#563d7c">
 
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -38,7 +39,7 @@
 <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('plugins/feather.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script>
-<script src="{{ asset('js/dashboard.js')  }}"></script>
+<script src="{{ asset('js/main.js')  }}"></script>
 @yield('script')
 </body>
 </html>
