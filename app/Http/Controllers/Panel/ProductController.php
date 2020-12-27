@@ -37,13 +37,11 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        view()->share('categoryIds', array_column($product->categories->toArray(), 'id'));
-
-        Log::debug(print_r(array_column($product->categories->toArray(), 'id'),true));
+        view()->share('id', $product->category_id);
 
         return view('panel.product.edit')
             ->with([
-                'product'   => $product,
+                'product'    => $product,
                 'categories' => $this->categoryRepository->all(),
                 'endpoint'   => route('panel.product.ajax.update', $product->id)
             ]);

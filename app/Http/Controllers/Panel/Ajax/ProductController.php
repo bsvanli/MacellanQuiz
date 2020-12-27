@@ -24,15 +24,9 @@ class ProductController extends Controller
     public function all()
     {
         try {
-            $products = Product::with('categories')->select('products.*');
+            $products = Product::with('category');
             return datatables()
                 ->eloquent($products)
-                ->editColumn('categories', function(Product $product){
-                    $names = array_map(function($e) {
-                        return $e['name'];
-                    }, $product->categories->toArray());
-                    return implode(', ', $names);
-                })
                 ->toJson();
         } catch (\Exception $e) {
             return response()->json([
@@ -45,10 +39,11 @@ class ProductController extends Controller
     public function add(ProductRequest $request)
     {
         $data = [
-            'name'      => $request->get('name'),
-            'price' => $request->get('price')
+            'name'        => $request->get('name'),
+            'price'       => $request->get('price'),
+            'category_id' => $request->get('category')
         ];
-        if ($this->productRepository->create($data, $request->get('category'))) {
+        if ($this->productRepository->create($data)) {
             return response()->json([
                 'status'  => true,
                 'message' => 'Ürün eklendi',
@@ -67,10 +62,11 @@ class ProductController extends Controller
     public function update(Product $product, ProductRequest $request)
     {
         $data = [
-            'name'      => $request->get('name'),
-            'price' => $request->get('price')
+            'name'        => $request->get('name'),
+            'price'       => $request->get('price'),
+            'category_id' => $request->get('category')
         ];
-        if ($this->productRepository->update($data, $request->get('category'), $product->id)) {
+        if ($this->productRepository->update($data, $product->id)) {
             return response()->json([
                 'status'  => true,
                 'message' => 'Ürün güncellendi',

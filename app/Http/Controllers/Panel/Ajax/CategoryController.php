@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-
     private CategoryRepository $categoryRepository;
 
     public function __construct(CategoryRepository $categoryRepository)
@@ -36,7 +35,7 @@ class CategoryController extends Controller
     public function add(CategoryRequest $request)
     {
         $data = [
-            'parent_id' => $request->get('parent'),
+            'parent_id' => $request->get('category'),
             'name'      => $request->get('name')
         ];
         if ($this->categoryRepository->create($data)) {
@@ -57,8 +56,16 @@ class CategoryController extends Controller
 
     public function update(Category $category, CategoryRequest $request)
     {
+
+        if(in_array($request->get('category'), $category->childCategoryIds)){
+            return response()->json([
+                'status'  => false,
+                'message' => 'Alt kategorisi kendisi olamaz'
+            ], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
         $data = [
-            'parent_id' => $request->get('parent'),
+            'parent_id' => $request->get('category'),
             'name'      => $request->get('name')
         ];
         if ($this->categoryRepository->update($data, $category->id)) {

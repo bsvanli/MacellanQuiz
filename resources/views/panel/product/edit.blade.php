@@ -18,7 +18,7 @@
                 <label for="product-description">Bağlı olduğu kategoriler</label>
                 <div class="just-padding">
                     <div class="category-list list-group-root well">
-                        @each('panel.partials.category-checkbox', $categories, 'category')
+                        @each('panel.partials.category', $categories, 'category')
                     </div>
                 </div>
             </div>

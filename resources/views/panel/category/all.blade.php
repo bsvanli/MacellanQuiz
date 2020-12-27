@@ -34,6 +34,7 @@
                 ajax: endpoint,
                 processing: true,
                 serverSide: true,
+                searching: false,
                 columns: [
                     {data: 'id'},
                     {data: 'name'},
@@ -43,23 +44,9 @@
                     {data: null, defaultContent: '', orderable: false}
                 ],
                 createdRow: function ( row, data, index ) {
-                    $('td', row).eq(5).addClass('text-right').html('<a href="/panel/category/edit/' + data.id + '" class="btn btn-primary btn-sm mr-1">Düzenle</a> <a href="/api/products/' + data.id + '" class="delete btn btn-danger btn-sm">Sil</a>');
+                    $('td', row).eq(5).addClass('text-right').html('<a href="/panel/category/edit/' + data.id + '" class="btn btn-primary btn-sm mr-1">Düzenle</a>');
                 }
             } );
-            $(document).on('click', '.delete', deleteProduct);
         });
-        function deleteProduct(e){
-            e.preventDefault();
-            $.ajax({
-                url: $(this).attr('href'),
-                method: 'DELETE',
-                error: function(jqXHR, textStatus, errorThrown){
-                    alert(jqXHR.responseJSON.messages[0]);
-                },
-                success: function (response) {
-                    dt.ajax.reload()
-                }
-            });
-        }
     </script>
 @endsection

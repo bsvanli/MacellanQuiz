@@ -4,9 +4,12 @@
 namespace App\Repositories\Interfaces;
 
 
+use App\Models\Category;
+
 interface ProductRepositoryInterface
 {
     public function all();
-    public function update(array $data, array $categories, int $id);
-    public function create(array $data, array $categories);
+    public function update(array $data, int $id);
+    public function create(array $data);
+    public function whereCategory(Category $category);
 }

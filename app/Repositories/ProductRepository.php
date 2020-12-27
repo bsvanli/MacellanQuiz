@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 
@@ -17,27 +18,34 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
     public function all(){
-        return $this->model->with('categories')->get();
+        return $this->model->with('category')->get();
     }
 
 
-    public function update(array $data, array $categories, int $id)
+    public function update(array $data, int $id)
     {
-        $update = $this->model->where('id', $id)->update($data);
+        return $this->model->find($id)->update($data);
+    }
 
-        if($update){
-            $product = $this->model->find($id);
-            $product->categories()->sync($categories);
+    public function create(array $data)
+    {
+        return $this->model->create($data);
+    }
+
+    public function whereCategory(Category $category = null){
+
+        if($category){
+            return $this->model->whereIn('category_id', $category->childCategoryIds);
         }
-        return $update;
+
+        return $this->model;
     }
 
-    public function create(array $data, array $categories)
-    {
-        $product = $this->model->create($data);
+    public function countByCategory($categoryId){
+        return $this->model->where('category_id', $categoryId)->count();
+    }
 
-        $product->categories()->sync($categories);
-
-        return $product;
+    public function paginate($limit){
+        return $this->model->paginate($limit);
     }
 }

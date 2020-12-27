@@ -16,7 +16,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="col-md-12">
             <div class="container">
                 <div class="row mt-5">
                     <form id="loginForm"  class="form-signin" style="margin: 0 auto;">
@@ -56,7 +56,6 @@
                     alert(jqXHR.responseJSON.message);
                 },
                 success: function (response) {
-                    alert(response.message);
                     location.href = response.data.redirect;
                 },
                 complete: function () {

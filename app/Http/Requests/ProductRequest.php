@@ -16,7 +16,7 @@ class ProductRequest extends FormRequest
         return [
             'name'     => 'required|max:50',
             'price'    => 'required|regex:/^\d*(\.\d{1,2})?$/',
-            'category' => 'required|array',
+            'category' => 'required|exists:categories,id',
         ];
     }
 
@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
         return [
             'name'     => 'Ürün Adı',
             'price'    => 'Ürün Fiyatı',
-            'category' => 'Bağlı olduğu kategoriler'
+            'category' => 'Bağlı olduğu kategori'
         ];
     }
 
