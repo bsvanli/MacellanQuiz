@@ -1,0 +1,74 @@
+.list-group-item{
+    padding: 8px 5px;
+    color: #333;
+}
+
+.list-group.list-group-root {
+    padding: 0;
+    overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+    margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+    border-radius: 0;
+    border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+    border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group-item {
+    font-weight: 600;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+    padding-left: 25px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+    padding-left: 50px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group-item {
+    padding-left: 75px;
+}
+.count{
+    position: absolute;
+    right: 0;
+}
+
+.card .card-body{
+    height: 72px;
+    overflow:hidden;
+    padding: 10px;
+    position: relative;
+}
+
+.card .card-body .card-title{
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+}
+
+.card .badge.badge-success{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 15px;
+}
+
+.category-title{
+    position: relative;
+}
+
+.total-product{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 18px;
+    color: #007bff;
+}
