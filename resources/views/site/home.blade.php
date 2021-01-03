@@ -32,8 +32,12 @@
     <div class="row">
         <div class="col-md-3">
 
-            <div class="list-group list-group-root well">
-                @each('partials.category', $categories, 'category')
+            <div class="categories">
+                <ul>
+                    @foreach ($categories->whereNull('parent_id') as $category)
+                        @include('partials.category', ['child' => $category, 'categories' => $categories])
+                    @endforeach
+                </ul>
             </div>
 
         </div>
@@ -42,7 +46,7 @@
                 <div class="container mb-3">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4 class="category-title">{{ $cat->name }}<span class="total-product"><strong>Toplam ürün: </strong> {{ number_format($products->total()) }}</span></h4>
+                            <h4 class="category-title">{{ $cat->name }}<span class="total-product"><strong>Toplam ürün: </strong> {{ $products->total() }}</span></h4>
                         </div>
                     </div>
                 </div>

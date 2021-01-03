@@ -12,13 +12,13 @@
             </div>
             <div class="form-group">
                 <label for="product-description">Bağlı olduğu kategori</label>
-                <div class="just-padding">
-                    <div class="category-list list-group-root well">
-                            <div class="category-item">
-                                <label><input type="radio" name="category" value="" @if(isset($category) && $category->parent_id == null) checked="checked" @endif/> Ana Kategori</label>
-                            </div>
-                        @each('panel.partials.category', $categories, 'category')
-                    </div>
+                <div class="categories">
+                    <ul>
+                        <li><label><input type="radio" name="category" value="" @if(!isset($category) || $category->parent_id == null) checked="checked" @endif/> Ana Kategori</label></li>
+                        @foreach ($categories->whereNull('parent_id') as $category)
+                            @include('panel.partials.category', ['child' => $category, 'categories' => $categories])
+                        @endforeach
+                    </ul>
                 </div>
             </div>
 

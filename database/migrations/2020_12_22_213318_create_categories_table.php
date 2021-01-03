@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
                 ->nullable()
                 ->index('parent_category');
             $table->string('name');
+            $table->unsignedInteger('total_count')->default(0);
             $table->timestamps();
         });
     }

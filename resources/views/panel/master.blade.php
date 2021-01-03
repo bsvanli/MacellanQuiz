@@ -9,7 +9,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/datatables/datatables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/panel.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/panel.css?v=1') }}" rel="stylesheet">
     <meta name="theme-color" content="#563d7c">
 
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">

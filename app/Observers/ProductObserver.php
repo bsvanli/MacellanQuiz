@@ -3,25 +3,20 @@
 namespace App\Observers;
 
 use App\Models\Product;
-use App\Repositories\ActionLogRepository;
-use App\Repositories\CategoryRepository;
-use App\Repositories\ProductRepository;
-use Illuminate\Support\Facades\Auth;
+use App\Services\CategoryService;
+use Illuminate\Support\Facades\Log;
 
 class ProductObserver
 {
-    private CategoryRepository $categoryRepository;
-    private ProductRepository $productRepository;
-    private ActionLogRepository $actionLogRepository;
+    private CategoryService $categoryService;
 
-
-    public function __construct(CategoryRepository $categoryRepository,
-                                ProductRepository $productRepository,
-                                ActionLogRepository $actionLogRepository)
+    /**
+     * ProductObserver constructor.
+     * @param CategoryService $categoryService
+     */
+    public function __construct(CategoryService $categoryService)
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->productRepository = $productRepository;
-        $this->actionLogRepository = $actionLogRepository;
+        $this->categoryService = $categoryService;
     }
 
 
@@ -33,7 +28,7 @@ class ProductObserver
      */
     public function created(Product $product)
     {
-
+        $this->categoryService->calculateProductCounts();
     }
 
     /**
@@ -44,8 +39,9 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-
-
+        if ($product->wasChanged('category_id')){
+            $this->categoryService->calculateProductCounts();
+        }
     }
 
     /**

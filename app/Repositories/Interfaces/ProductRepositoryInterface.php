@@ -11,5 +11,5 @@ interface ProductRepositoryInterface
     public function all();
     public function update(array $data, int $id);
     public function create(array $data);
-    public function whereCategory(Category $category);
+    public function whereCategory(array $categoryIds);
 }

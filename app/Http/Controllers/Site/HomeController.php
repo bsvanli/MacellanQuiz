@@ -24,15 +24,18 @@ class HomeController extends Controller
 
     public function index(Category $category = null)
     {
+        $categories = $this->categoryRepository->all();
 
-        $products = $this->productRepository
-            ->whereCategory($category)
-            ->paginate(20);
+        $products = $this->productRepository;
+        if($category){
+            $products = $products->whereCategory($this->categoryRepository->getIdsWithSubCategories($categories, $category->id));
+        }
+        $products = $products->paginate(20);
 
 
         return view('site.home')
             ->with([
-                'categories' => $this->categoryRepository->all(),
+                'categories' => $categories,
                 'cat'        => $category,
                 'products'   => $products
             ]);
