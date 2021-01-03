@@ -22,8 +22,7 @@ class CategoryController extends Controller
     public function all()
     {
         try {
-            $categories = Category::with('parent')->select('categories.*');
-            return datatables()->eloquent($categories)->toJson();
+            return datatables()->eloquent(Category::query())->toJson();
         } catch (\Exception $e) {
             return response()->json([
                 'status'  => false,
@@ -51,13 +50,14 @@ class CategoryController extends Controller
         return response()->json([
             'status'  => false,
             'message' => 'Hata oluştu'
-        ], JsonResponse::HTTP_CREATED);
+        ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
     }
 
-    public function update(Category $category, CategoryRequest $request)
+    public function update(Category $category, CategoryRepository $categoryRepository, CategoryRequest $request)
     {
 
-        if(in_array($request->get('category'), $category->childCategoryIds)){
+        $categories = $categoryRepository->all();
+        if(in_array($request->get('category'), $categoryRepository->getIdsWithSubCategories($categories, $category->id))){
             return response()->json([
                 'status'  => false,
                 'message' => 'Alt kategorisi kendisi olamaz'
@@ -81,6 +81,6 @@ class CategoryController extends Controller
         return response()->json([
             'status'  => false,
             'message' => 'Hata oluştu'
-        ], JsonResponse::HTTP_CREATED);
+        ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

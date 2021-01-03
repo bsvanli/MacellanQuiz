@@ -16,10 +16,12 @@
             </div>
             <div class="form-group">
                 <label for="product-description">Bağlı olduğu kategoriler</label>
-                <div class="just-padding">
-                    <div class="category-list list-group-root well">
-                        @each('panel.partials.category', $categories, 'category')
-                    </div>
+                <div class="categories">
+                    <ul>
+                        @foreach ($categories->whereNull('parent_id') as $category)
+                            @include('panel.partials.category', ['child' => $category, 'categories' => $categories])
+                        @endforeach
+                    </ul>
                 </div>
             </div>
 

@@ -20,6 +20,7 @@ class ProductSeeder extends Seeder
         $this->command->getOutput()->newLine();
         $this->command->getOutput()->progressStart(100000);
 
+        Product::flushEventListeners();
         for ($i = 0; $i < 1000; $i++) {
             $category = $categories->random();
             Product::factory()->count(100)->create(['category_id' => $category->id]);

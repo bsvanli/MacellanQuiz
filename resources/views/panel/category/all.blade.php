@@ -12,7 +12,6 @@
                 <th>#ID</th>
                 <th>Kategori Adı</th>
                 <th>Ürün Sayısı</th>
-                <th>Bağlı Olduğu Kategori</th>
                 <th>Son Güncelleme</th>
                 <th class="text-right">Seçenekler</th>
             </tr>
@@ -38,13 +37,12 @@
                 columns: [
                     {data: 'id'},
                     {data: 'name'},
-                    {data: 'product_count'},
-                    {data: 'parent.name', defaultContent: 'Ana Kategori'},
+                    {data: 'total_count', defaultContent: 0},
                     {data: 'updated_at'},
                     {data: null, defaultContent: '', orderable: false}
                 ],
                 createdRow: function ( row, data, index ) {
-                    $('td', row).eq(5).addClass('text-right').html('<a href="/panel/category/edit/' + data.id + '" class="btn btn-primary btn-sm mr-1">Düzenle</a>');
+                    $('td', row).eq(4).addClass('text-right').html('<a href="/panel/category/edit/' + data.id + '" class="btn btn-primary btn-sm mr-1">Düzenle</a>');
                 }
             } );
         });

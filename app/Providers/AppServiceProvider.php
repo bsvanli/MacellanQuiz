@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\CategoryService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -28,5 +29,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultView('vendor.pagination.bootstrap-4');
         Schema::defaultStringLength(191);
 
+    }
+
+    public function provides()
+    {
+        return [CategoryService::class];
     }
 }

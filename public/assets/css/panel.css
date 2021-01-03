@@ -1,37 +1,17 @@
-.just-padding {
-    padding: 15px;
+.categories ul{
+    list-style-type: none;
 }
-
-.category-list.list-group-root {
+.categories ul li{
+    margin: 3px 0;
+}
+.categories > ul{
     padding: 0;
-    overflow: hidden;
 }
-
-.category-list.list-group-root .category-list {
-    margin-bottom: 0;
+.categories ul li a{
+    color: #333;
+    position: relative;
+    display:block;
 }
-
-.category-list.list-group-root .category-item {
-    border-radius: 0;
-    border-width: 1px 0 0 0;
-}
-
-.category-list.list-group-root > .category-item label{
-    font-weight: 700;
-}
-
-.category-list.list-group-root > .category-item:first-child {
-    border-top-width: 0;
-}
-
-.category-list.list-group-root > .category-list > .category-item {
-    padding-left: 30px;
-}
-
-.category-list.list-group-root > .category-list > .category-list > .category-item {
-    padding-left: 45px;
-}
-.count{
-    position: absolute;
-    right: 0;
+.categories ul li a .cat-count{
+    float:right;
 }
